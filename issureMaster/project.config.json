@@ -1,0 +1,106 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"enhance": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"uglifyFileName": true,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.7.3",
+	"appid": "wx3388f214a15e0086",
+	"projectname": "%E4%BF%9D%E5%8D%95%E7%AE%A1%E5%AE%B6",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 1,
+			"list": [
+				{
+					"id": 0,
+					"name": "xueyi",
+					"pathName": "pages/index/index",
+					"query": "uid=54675736457730&type=2&shareDay=20190718",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "share",
+					"pathName": "pages/index/index",
+					"query": "uid=54546009063938&type=2&shareDay=20190722",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "challengeHome",
+					"pathName": "pages/challengeHome/challengeHome",
+					"query": "uid=23143421055490&type=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "rankList",
+					"pathName": "pages/rankList/rankList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "challenge",
+					"pathName": "pages/challenge/challenge",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "treasureBox",
+					"pathName": "pages/treasureBox/treasureBox",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "redPackets",
+					"pathName": "pages/redPackets/redPackets",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

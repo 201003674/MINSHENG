@@ -1,0 +1,339 @@
+.challenge-pages{
+    width:100%;
+    height:100%;
+    justify-content: space-between;
+    background:linear-gradient(136deg,rgba(70,14,186,1) 0%,rgba(100,75,212,1) 49%,rgba(95,138,238,1) 100%);
+}
+.challenge-header{
+    width:606rpx;
+    height:112rpx;
+    position: relative;
+    padding:0 82rpx 40rpx 84rpx;
+    z-index: 0;
+}
+.header-bg{
+    width:100%;
+    height:100%;
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: -1;
+}
+.challenge-title{
+    width:100%;
+    height:100%;
+    font-size:34rpx;
+    font-family:PingFangSC-Medium;
+    font-weight:500;
+    color:rgba(255,255,255,1);
+    z-index: 9;
+}
+.season-time-info{
+    font-size:24rpx;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    margin:8rpx 0 32rpx;
+}
+.user-level-info{
+    width:462rpx;
+    height:64rpx;
+    background:rgba(0,184,255,0.2);
+    border-radius:32rpx;
+    margin-bottom:44rpx;
+}
+.level-icon-box{
+    width:44rpx;
+    height:44rpx;
+    position: relative;
+}
+.level-icon{
+    width:100%;
+    height:100%;
+}
+.level-line{
+    width:22rpx;
+    height:6rpx;
+    margin:0 8rpx;
+}
+.red-packets-icon{
+    width:40rpx;
+    height:48rpx;
+}
+.swiper-contain{
+    width:100%;
+}
+.swiper{
+    width:100%;
+    height:450rpx;
+}
+.swiper-item{
+    width:100%;
+}
+.item-actived{
+    animation: itemActived 1s 0.3s forwards;
+}
+.item-noactived{
+    height:320rpx !important;
+    top:80rpx;
+}
+.pic-actived{
+    animation: picActived 1.8s 0.2s forwards;
+}
+.pic-noactived{
+    width:320rpx !important;
+    height:320rpx !important;
+    top:80rpx;
+}
+.swiper-pic{
+    width:320rpx;
+    height:320rpx;
+    display: flex;
+}
+
+.user-status{
+    height:72rpx;
+    margin:40rpx 0;
+    /* animation: seasonStar 1s ease-in-out forwards; */
+}
+.star-light{
+    width:48rpx;
+    height:48rpx;
+    margin-right:8rpx;
+    /* animation: seasonStar 1s ease-in-out forwards; */
+}
+.challenge-desc{
+    font-size:22rpx;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    margin-bottom:18rpx;
+}
+.power-icon{
+    width:20rpx;
+    height:36rpx;
+    margin:0 10rpx;
+}
+.btn-wrap{
+    width:296rpx;
+    height:80rpx;
+    margin-bottom:90rpx;
+}
+.begain-btn{
+    width:296rpx;
+    height:88rpx;
+}
+.theme-rules{
+    font-size:22rpx;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(243,230,230,1);
+    position: relative;
+    line-height: 1;
+    padding:14rpx 0;
+}
+.challenge-rule{
+    text-decoration:underline;
+    padding:14rpx 0 14rpx 12rpx;
+    /* border-left:2rpx solid #fff; */
+    /* height:22rpx; */
+    line-height: 22rpx;
+    position: absolute;
+    top:0;
+    right:-50rpx;
+}
+.side-box{
+    position: fixed;
+    right:32rpx;
+    bottom:76rpx;
+    margin-bottom:20rpx;
+    background:linear-gradient(136deg,rgba(67,209,255,1) 0%,rgba(70,14,186,1) 100%);
+    padding:2rpx;
+    border-radius:16rpx;
+}
+.side-container{
+    width:96rpx;
+    border-radius:16rpx;
+    padding:26rpx 18rpx 6rpx;
+    position: relative;
+    background:linear-gradient(180deg,rgba(111,178,255,1) 0%,rgba(70,133,255,1) 57%,rgba(136,140,241,1) 100%);
+}
+.icon-pic{
+    width:48rpx;
+    height:64rpx;
+}
+.icon-box{
+    margin-bottom:20rpx;
+}
+.icon-pic-box{
+    width:48rpx;
+    height:64rpx;
+    position: relative;
+    margin-bottom:8rpx;
+}
+.icon-name{
+    font-size:20rpx;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+}
+.icon-num{
+    width:28rpx;
+    height:28rpx;
+    border-radius: 50%;
+    position: absolute;
+    top:-14rpx;
+    right:-14rpx;
+    background:rgba(255,0,0,1);
+    font-size:18rpx;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+}
+.question-icon{
+    width:36rpx;
+    height:36rpx;
+    position: absolute;
+    bottom:-48rpx;
+    left:30rpx;
+}
+.close-rule{
+    width:60rpx;
+    height:60rpx;
+    margin-bottom:20rpx;
+}
+.rule-pic{
+    width:100%;
+    height:auto;
+}
+.rules{
+    width:100%;
+    height:100%;
+    text-align: center;
+    padding:0 40rpx;
+    box-sizing: border-box;
+}
+.arrow{
+    width:32rpx;
+    height:32rpx;
+    position: absolute;
+    bottom:-43rpx;
+    left:6rpx;
+}
+.star-zongshi{
+    width:56rpx;
+    height:80rpx;
+}
+.zongshi-grap{
+    width:56rpx;
+    height:80rpx;
+}
+.zongshi-txt{
+    font-size:34rpx;
+    font-weight:500;
+    color:rgba(255,255,255,1);
+    margin-left:16rpx;
+    line-height: 34rpx;
+    margin-top:38rpx;
+}
+.season-data{
+    margin:0 12rpx;
+    padding-right:15rpx;
+    border-right:2rpx solid #fff;
+}
+.season-lock{
+    width: 72rpx;
+    height:72rpx;
+}
+.power-wrap{
+    width:100%;
+    padding:0 64rpx;
+    animation: slideDown 0.5s ease-in-out forwards;
+}
+.power{
+    width:506rpx;
+}
+.progress-txt{
+    font-size:32rpx;
+    font-weight:500;
+    color:rgba(255,255,255,1);
+    margin-top:30rpx;
+    opacity: 0;
+    animation: rightIn 1.4s linear forwards;
+}
+.ms{
+    width: 100%;
+    text-align: center;
+    font-size:28rpx;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    position: absolute;
+    left:0;
+    bottom:46rpx;
+    opacity: 0;
+    animation: msSlideUp 2.2s linear forwards;
+}
+.season-awards{
+    width:96rpx;
+    height:38rpx;
+    position: absolute;
+    left:0;
+    top:-44rpx;
+}
+@keyframes picActived{
+    from{
+        width:320rpx;
+        height:320rpx;
+    }
+    to{
+        width:450rpx;
+        height:450rpx;
+    }
+}
+@keyframes seasonStar{
+    from{
+        transform: scale(0.6);
+        transform: translateX(-40rpx)
+    }
+    to{
+        transform: scale(1);
+        transform: translateX(0)
+    }
+}
+@keyframes cartonIn{
+    0%{
+        /* transform: scaleY(0); */
+        height:0rpx;
+    }
+    100%{
+        height:160rpx;
+        /* transform: scaleY(1); */
+    }
+    
+}
+@keyframes rightIn{
+    49%{
+        opacity: 0;
+        transform: translateX(300rpx)
+    }
+    50%{
+        opacity: 1;
+        transform: translateX(300rpx)
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0)
+    }
+}
+@keyframes msSlideUp{
+    69%{
+        transform: translateY(40rpx);
+        opacity: 0;
+    }
+    70%{
+        transform: translateY(40rpx);
+        opacity: 1;
+    }
+    100%{
+        transform: translateY(0rpx);
+        opacity: 1;
+    }
+}

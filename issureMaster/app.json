@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/treasureBox/treasureBox",
+    "pages/rankList/rankList",
+    "pages/homepage/homepage",
+    "pages/redPackets/redPackets",
+    "pages/challengeHome/challengeHome",
+    "pages/challenge/challenge",
+    "pages/login/login"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "backgroundColor":"#5E77F2",
+    "navigationBarBackgroundColor": "#5E77F2",
+    "navigationBarTitleText": "保保大师挑战赛",
+    "navigationBarTextStyle": "white",
+    "navigationStyle":"custom",
+    "disableScroll": true
+  },
+  "sitemapLocation": "sitemap.json"
+}
+

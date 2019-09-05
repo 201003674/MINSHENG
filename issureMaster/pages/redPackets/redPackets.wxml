@@ -1,0 +1,75 @@
+<view class='red-packets'>
+    <loading hidden="{{hiddenLoading}}">{{loadingText}}</loading>
+    <image src='../../asset/hongbao/red_packets_back.png' class='go-back' bindtap='goBack' style='top:{{statusBarHeight+12}}rpx'></image>
+    <view class='compound-box' wx:if="{{redPacketsData.isCompose!==1}}">
+        <image src='{{circleBg}}' mode="widthFix" class='compound-bg'></image>
+        <view class='red-packets-container'>
+            <view class='packets-group'>
+                <view class='cards-box card-top'>
+                    <image src="{{redPacketsData.chipA?'../../asset/hongbao/hongbao_A.png':'../../asset/hongbao/hongbao_A_disabled.png'}}" mode="scaleToFill" class='red-packets-pic'></image>
+                    <view class='packets-A packets-txt flx-ce-ce'>碎片A
+                        <text wx:if="{{redPacketsData.chipA}}">*{{redPacketsData.chipA}}</text>
+                    </view>
+                    <image class='chip-light' wx:if="{{redPacketsData.chipA}}" src='../../asset/hongbao/chip_light.png'></image>
+                </view>
+                <view class='cards-box card-left'>
+                    <image src="{{redPacketsData.chipB?'../../asset/hongbao/hongbao_B.png':'../../asset/hongbao/hongbao_B_disabled.png'}}" mode="scaleToFill" class='red-packets-pic'></image>
+                    <view class='packets-B packets-txt flx-ce-ce'>碎片B
+                        <text wx:if="{{redPacketsData.chipB}}">*{{redPacketsData.chipB}}</text>
+                    </view>
+                    <image class='chip-light' wx:if="{{redPacketsData.chipB}}" src='../../asset/hongbao/chip_light.png'></image>
+                </view>
+                <view class='cards-box card-bottom'>
+                    <image src="{{redPacketsData.chipC?'../../asset/hongbao/hongbao_C.png':'../../asset/hongbao/hongbao_C_disabled.png'}}" mode="scaleToFill" class='red-packets-pic'></image>
+                    <view class='packets-B packets-txt flx-ce-ce'>碎片C
+                        <text wx:if="{{redPacketsData.chipC}}">*{{redPacketsData.chipC}}</text>
+                    </view>
+                    <image class='chip-light' wx:if="{{redPacketsData.chipC}}" src='../../asset/hongbao/chip_light.png'></image>
+                </view>
+                <view class='cards-box card-right'>
+                    <image src="{{redPacketsData.chipD?'../../asset/hongbao/hongbao_D.png':'../../asset/hongbao/hongbao_D_disabled.png'}}" mode="scaleToFill" class='red-packets-pic'></image>
+                    <view class='packets-B packets-txt flx-ce-ce'>碎片D
+                        <text wx:if="{{redPacketsData.chipD}}">*{{redPacketsData.chipD}}</text>
+                    </view>
+                    <image class='chip-light' wx:if="{{redPacketsData.chipD}}" src='../../asset/hongbao/chip_light.png'></image>
+                </view>
+            </view>
+        </view>
+        <view class='red-point move-left'></view>
+        <view class='red-point move-top'></view>
+        <view class='red-point move-right'></view>
+        <view class='red-point move-bottom'></view>
+        <image src="{{compoundBt}}" class='compound-btn'></image>
+    </view>
+    <view class="count-down-box flx-ce-clm" wx:if="{{redPacketsData.isCompose===1}}">
+        <view class="con-header">恭喜你</view>
+        <view class="con-txt">已集齐红包碎片合成"赛季红包"</view>
+        <view class="bongbao-contain flx-ce-ce">
+            <image src="../../asset/hongbao/hongbao_light.png" class="hongbao-light"></image>
+            <view class="hongbao-box flx-ce-ce">
+                <image src="../../asset/hongbao/dahongbao.png" class="hongbao-img"></image>
+                <view class="count-down-contain flx-ce-clm">
+                    <view class="count-down">距离本赛季红包结算日还有</view>
+                    <view class="count-time">
+                        {{day}}
+                        <text class="count-text">天</text>
+                        {{hour}}
+                        <text class="count-text">时</text>
+                        {{minute}}
+                        <text class="count-text">分</text>
+                        {{second}}
+                        <text class="count-text">秒</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class='red-packets-rules'>
+        <view class='rules-title'>赛季红包发放说明:</view>
+        <view class='rules-txt'>1.在晋升“宗师”的道路上，红包碎片一路陪伴。</view>
+        <view class='rules-txt'>2.集齐四张不同的碎片，即可召唤“赛季红包”，参与赛季红包瓜分。</view>
+        <view class='rules-txt'>3.每个赛季末的结算日（48小时内），系统将为您派发微信红包。</view>
+        <view class='rules-txt'>4.宗师排位赛排名越高，红包越大～</view>
+        <view class='rules-txt'>5.关注“保险体验师”公众号，回复“人工”可以召唤活动客服为您服务</view>
+    </view>
+</view>

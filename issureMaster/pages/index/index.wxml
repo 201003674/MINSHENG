@@ -1,0 +1,441 @@
+<view class="index-page" style='padding-top:{{statusBarHeight}}rpx;padding-bottom:{{isIpx?"60rpx":""}}'>
+    <loading hidden="{{hiddenLoading}}">{{loadingText}}</loading>
+    <view class='nav-bar flx-ce-ce'>
+        <text>保保大师挑战赛</text>
+        <view class='menu-content'>
+            <view class='menu-icon' bindtap='handleCheck' data-mark="goRank">
+                <view class="icon-content">
+                    <image src="../../asset/index/rank_icon.png" class='menu-img'></image>
+                </view>
+                <text class='icon-font'>排行榜</text>
+            </view>
+            <view class='menu-icon' bindtap='handleCheck' data-mark="treasureBox">
+                <view class="icon-content">
+                    <image src="../../asset/index/task_icon.png" class='menu-img'></image>
+                    <view class='task-num' wx:if="{{chestNum!==7}}">{{chestNum+''}}/23</view>
+                </view>
+                <text class='icon-font'>任务宝箱</text>
+            </view>
+            <view class='menu-icon' bindtap='handleCheck' data-mark="knapsack">
+                <view class="icon-content">
+                    <image src="../../asset/index/bag_icon.png" class='menu-img'></image>
+                    <view class='task-num' wx:if="{{packageFlag===1}}">NEW</view>
+                </view>
+                <text class='icon-font'>背包</text>
+            </view>
+            <view class='menu-icon' bindtap='handleCheck' data-mark="redPackets">
+                <view class='icon-content'>
+                    <image src="../../asset/index/money_icon.png" class='menu-img'></image>
+                    <view class='task-num' wx:if="{{chipFlag===1}}">NEW</view>
+                </view>
+                <text class='icon-font'>红包碎片</text>
+            </view>
+        </view>
+    </view>
+    <view class='home-user'>
+        <view class='home-user-header'>
+            <image src="{{insureUserVO.avatarUrl?insureUserVO.avatarUrl:defaultHeader}}" class='header-image' bindtap='handleCheck' data-mark="goHome"></image>
+        </view>
+        <view class='home-user-info'>
+            <text class='user-name' class='nickName'>{{insureUserVO.nickName}}</text>
+            <view class='user-info flx-ce-ce' wx:if="{{insureUserVO.userLevel<4}}">
+                <image src="{{insureUserVO.userLevel===1?darenIcon:insureUserVO.userLevel===2?gaoshouIcon:dashiIcon}}" class='user-level'></image>
+                <image src="../../asset/challengeHome/star_light.png" class='home-star'></image>
+                <image src="../../asset/challengeHome/star_light.png" class='home-star' wx:if="{{insureUserVO.starNum>=2}}"></image>
+                <image src="../../asset/challengeHome/star_light.png" class='home-star' wx:if="{{insureUserVO.starNum===3}}"></image>
+                <image src="../../asset/challengeHome/star_black.png" class='home-star' wx:if="{{insureUserVO.starNum<insureUserVO.userLevel}}"></image>
+            </view>
+            <view class='user-info flx-ce-ce' wx:if="{{insureUserVO.userLevel===4}}">
+                <image src="{{zongshiIcon}}" class='user-level'></image>
+                <image src="../../asset/index/zongshiStar@2x.png" class='zongshi-star'></image>
+                <text style="color:#fff;font-size:12px">x{{insureUserVO.starNum}}</text>
+            </view>
+        </view>
+    </view>
+    <view class='home-section'>
+        <view>
+            <image src="../../asset/index/logo@2x.png" class='home-logo'></image>
+        </view>
+        <text class='home-time'>—— {{seasonCheckVO.seasonTitle||'活动未开始'}} {{seasonCheckVO.seasonDate}} ——</text>
+        <text class='home-theme'>保险你做主 权益我知道</text>
+        <!-- 四个赛季主题图 -->
+        <view class='relative' wx:if="{{seasonCheckVO.seasonNo===1||!seasonCheckVO.seasonNo}}">
+            <image src="../../asset/index/cloud_left.png" class='season1-cloud-left cloud-left'></image>
+            <image src="../../asset/index/cloud_right.png" class='season1-cloud-right cloud-right'></image>
+            <image src="{{s1Theme}}" class='home-main-pic'></image>
+        </view>
+        <view class='relative' wx:if="{{seasonCheckVO.seasonNo===2}}">
+            <image src="../../asset/index/season2_cloud.png" class='season2-cloud cloud-right'></image>
+            <image src="../../asset/index/insurance_policy.png" class='insurance-policy'></image>
+            <image src="{{s2Theme}}" class='home-main-pic season-pic'></image>
+        </view>
+        <view class='relative' wx:if="{{seasonCheckVO.seasonNo===3}}">
+            <image src="../../asset/index/season3_cloud_left.png" class='season3-cloud-left cloud-left'></image>
+            <image src="../../asset/index/season3_cloud_right.png" class='season3-cloud-right cloud-right'></image>
+            <image src="{{s3Theme}}" class='home-main-pic'></image>
+        </view>
+        <view class='relative' wx:if="{{seasonCheckVO.seasonNo===4}}">
+            <image src="../../asset/index/season4_cloud_left.png" class='season4-cloud-left cloud-left'></image>
+            <image src="../../asset/index/season4_cloud_right.png" class='season4-cloud-right cloud-right'></image>
+            <image src="{{s3Theme}}" class='home-main-pic'></image>
+        </view>
+
+        <view class='begin-answer'>
+            <image src="../../asset/index/begainAnswer.png" class='begin-btn' bindtap='handleCheck' data-mark="challenge"></image>
+        </view>
+        <view class='btm-img' style='bottom:{{isIpx?"60rpx":"0rpx"}}'>
+            <view class='arrow-box'>
+                <image src='../../asset/index/home_arrow.png' class='home-arrow' bindtap="openRules"></image>
+            </view>
+            <image src='../../asset/index/season_tips.png' class='season-stragety' bindtap="openRules"></image>
+        </view>
+    </view>
+    <image src="{{hmBg}}" class='home-btm-bg'></image>
+    <view class='loop-content'>
+        <view class='relative'>
+            <image src="../../asset/index/baobao.png" class='bao-bao'></image>
+        </view>
+    </view>
+    <view class='loop-box'>
+        <view class='loop-inner'>
+            <text class='loop-text loop-before' wx:if="{{loopBefore}}">{{loopBefore}}</text>
+            <text class='loop-text loop-after' wx:if="{{loopAfter}}">{{loopAfter}}</text>
+        </view>
+    </view>
+    <!-- 一个弹窗一个遮罩层 2019/07/11 -->
+    <!-- 宝箱弹窗 -->
+    <view class='com-mask index-mask' wx:if="{{showShare}}">
+        <view class='flx-ce-clm' wx:if="{{showShare}}" data-model='inner'>
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' catchtap='closeBaoxiang'></image>
+            </view>
+            <view class='open-pic-box'>
+                <image src="{{chestGainTipVO.chestType==1?openXueyi:chestGainTipVO.chestType==2?openFenxiang:openZhuti}}" class='open-box-img'></image>
+                <image src='../../asset/baoxiang/open_light.png' class='open-light'></image>
+            </view>
+            <view class='open-txt flx-ce-ce'>
+                <image wx:if="{{chestGainTipVO.chestType!=4}}" src="{{chestGainTipVO.shareAvatar}}" class='tiyanshi-img'></image>
+                <image wx:if="{{chestGainTipVO.chestType==4}}" src='../../asset/baoxiang/tiyanshi_icon.png' class='tiyanshi-img'></image>
+                <view class='lx-ce-no-clm'>
+                    <view wx:if="{{chestGainTipVO.chestType==1}}">你的导师{{chestGainTipVO.shareUserName}}</view>
+                    <view wx:if="{{chestGainTipVO.chestType==2}}">你的好友{{chestGainTipVO.shareUserName}}</view>
+                    <view wx:if="{{chestGainTipVO.chestType==4}}">保险体验师</view>
+                    <view>送你"{{chestGainTipVO.chestType==4?(chestGainTipVO.chestSubject):chestGainTipVO.chestType==1?'学艺宝箱':'分享宝箱'}}"</view>
+                </view>
+            </view>
+            <view class='flx-ce-ce btn-open' catchtap='handleOpen'>立即开启</view>
+        </view>
+    </view>
+    <!-- 微信授权 -->
+    <view class='com-mask index-mask' wx:if="{{!authFlag}}">
+        <view class='authorization-box flx-ce-clm' wx:if="{{!authFlag}}">
+            <view class='auth-title'>申请获取以下权限</view>
+            <view class='auth-desc'>使用你的昵称、头像等公开信息用于分享、排行使用</view>
+            <button open-type="getUserInfo" class='auth-btn' bindgetuserinfo="getUserInfo">授权</button>
+        </view>
+    </view>
+    <!-- 赛季攻略 -->
+    <view class='com-mask index-mask' wx:if="{{showRules}}">
+        <scroll-view scroll-y="true" class='rules-container flx-ce-no-clm' wx:if="{{showRules}}">
+            <view class='arrow-wrap'>
+                <image src='../../asset/index/home_arrow.png' class='close_arrow' catchtap='closeRules'></image>
+            </view>
+            <image src="{{seasonRules}}" catchtap='closeRules' mode='widthFix' class='home-rules' data-model='inner'></image>
+        </scroll-view>
+    </view>
+    <!-- 赛季未开始 -->
+    <view class='com-mask index-mask' wx:if="{{preSeason}}">
+        <view class='season-end container flx-ce-clm' wx:if="{{preSeason}}">
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closePreSeason'></image>
+            </view>
+            <view class='end-wrap flx-ce-no-clm'>
+                <view class='end-title'>活动尚未开始</view>
+                <view class='end-info'>快去收集特权卡为冲击赛季奖励</view>
+                <view class='end-info'>做准备吧</view>
+                <view class='follow-season' catchtap='followSeason'>关注赛季信息 ></view>
+                <view class='end-btn flx-ce-ce' catchtap='closePreSeason'>确定</view>
+            </view>
+        </view>
+    </view>
+    <!-- 赛季结算 -->
+    <view class='com-mask index-mask' wx:if="{{seasonCalc}}">
+        <view class='season-end container flx-ce-clm' wx:if="{{seasonCalc}}">
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closeSeasonCalc'></image>
+            </view>
+            <view class='end-wrap flx-ce-no-clm'>
+                <view class='end-title'>{{seasonCheckVO.seasonTitle}}结算中</view>
+                <view class='end-info'>本赛季正在结算成绩，</view>
+                <view class='end-info'>敬请期待下一赛季</view>
+                <view class='follow-season' catchtap='followSeason'>关注赛季信息 ></view>
+                <view class='end-btn flx-ce-ce' catchtap='closeSeasonCalc'>确定</view>
+            </view>
+        </view>
+    </view>
+    <!-- 赛季结束 -->
+    <view class='com-mask index-mask' wx:if="{{seasonEnd}}">
+        <view class='season-end container flx-ce-clm' wx:if="{{seasonEnd}}">
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closeSeasonEnd'></image>
+            </view>
+            <view class='end-wrap flx-ce-no-clm'>
+                <view class='end-title'>{{seasonCheckVO.lastSeasonTitle}} 已结束</view>
+                <view class='end-info'>上赛季段位在新赛季继承，奖励于</view>
+                <view class='end-info'>48小时内发放</view>
+                <view class='follow-season' catchtap='followSeason'>关注赛季信息 ></view>
+                <view class='end-btn flx-ce-ce' catchtap='closeSeasonEnd'>开启新赛季</view>
+            </view>
+        </view>
+    </view>
+    <!-- 关注公众号弹窗 -->
+    <view class='com-mask index-mask follow-mask' catchtap='closeMask' wx:if="{{showFollow}}">
+        <view class='season-end container flx-ce-clm'>
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closeFlow'></image>
+            </view>
+            <view class='none-teacher-content flx-ce-clm'>
+                <image class='none-teacher' src="{{followAccount}}"></image>
+            </view>
+        </view>
+    </view>
+    <!-- 活动结束 -->
+    <view class='com-mask index-mask' wx:if="{{gameOver}}">
+        <view class='season-end container flx-ce-clm' wx:if="{{gameOver}}">
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closeOver'></image>
+            </view>
+            <view class='end-wrap flx-ce-no-clm'>
+                <view class='end-title'>活动已结束，感谢参与！</view>
+                <view class='end-info over-txt'>别忘了你的积分哦！</view>
+                <view class='end-info over-txt'>关注“保险体验师”公众号，</view>
+                <view class='end-info over-txt'>未来更多积分玩法，敬请期待！</view>
+                <view class='end-btn flx-ce-ce follow' catchtap='follow'>立即关注</view>
+            </view>
+        </view>
+    </view>
+    <!-- 分享达到领取上限、代理人无法领取宝箱、重复领取、自己不能领自己分享的 -->
+    <view class='com-mask index-mask' wx:if="{{showLimit}}">
+        <view class='container flx-ce-clm' wx:if="{{showLimit}}">
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closeUpLimit'></image>
+            </view>
+            <view class='limit flx-ce-no-clm'>
+                <image src='../../asset/index/up_limit_bg.png' class='limit-pic'></image>
+                <view wx:if="{{shareInfoVO.shareStatus==7}}">
+                    <view>你的身份是代理人,</view>
+                    <view>无法成为别人的徒弟哟。</view>
+                </view>
+                <view wx:if="{{shareInfoVO.shareStatus==8}}">你不能打开自己分享的宝箱哦～</view>
+                <view wx:if="{{shareInfoVO.shareStatus==5}}">同一人的分享宝箱一天仅能领取一次哦</view>
+                <view wx:if="{{shareInfoVO.shareStatus==4}}">你今天的分享宝箱领取已达上限</view>
+                <button class='limit-btn' bindtap='closeUpLimit'>我知道了</button>
+            </view>
+        </view>
+    </view>
+    <!-- 网络异常 -->
+    <view class='com-mask index-mask' wx:if="{{noNetWork}}">
+        <view class='container flx-ce-clm' wx:if="{{noNetWork}}">
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closeNetWork'></image>
+            </view>
+            <view class='limit flx-ce-no-clm'>
+                <image src='../../asset/index/up_limit_bg.png' class='limit-pic'></image>
+                <view>
+                    <view>网络开小差了~</view>
+                    <view>请稍等片刻！</view>
+                </view>
+                <button class='limit-btn' bindtap='closeNetWork'>我知道了</button>
+            </view>
+        </view>
+    </view>
+    <!-- 答题尚未开始 -->
+    <view class='com-mask index-mask' wx:if="{{!examStartFlag}}">
+        <view class='container flx-ce-clm' wx:if="{{!examStartFlag}}">
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closeUnExam'></image>
+            </view>
+            <view class='limit flx-ce-no-clm'>
+                <image src='../../asset/index/up_limit_bg.png' class='limit-pic'></image>
+                <view>
+                    <view>答题尚未开始~</view>
+                    <view>敬请期待</view>
+                </view>
+                <button class='limit-btn' bindtap='closeUnExam'>我知道了</button>
+            </view>
+        </view>
+    </view>
+    <!-- 背包弹窗 -->
+    <view class='com-mask index-mask' wx:if="{{knapsackMask}}">
+        <view class='knapsack-box' wx:if="{{knapsackMask}}">
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closePackages'></image>
+            </view>
+            <view class='knapsack-section'>
+                <view class='section-card'>
+                    <view class='section-header flx-ce-ce'>背包</view>
+                    <view class='section-card-list'>
+                        <view class='card-box' wx:for="{{cardData}}" wx:key="index">
+                            <view class="card-pic flx-ce-ce {{cardIndex==index&&item.num>0?'cur-box-border':''}}">
+                                <image wx:if="{{item.name}}" src="{{item.num===0?item.disImg:item.img}}" mode='aspectFit' bindtap='showCard' class='card-bg' data-index="{{index}}"></image>
+                                <text class='card-num' wx:if="{{item.name}}">{{item.num}}</text>
+                            </view>
+                            <view class='card-name flx-ce-ce'>{{item.name}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class='knapsack-pillar'>
+                    <view class='pillar'></view>
+                    <view class='pillar'></view>
+                </view>
+                <view class='show-box flx-ce-str'>
+                    <view class='card-pic card-pic-chosed flx-ce-ce'>
+                        <image mode='aspectFit' src='{{showInfo.showImg}}' class='card-bg'></image>
+                    </view>
+                    <view class='show-txt'>
+                        <view class='show-name'>{{showInfo.showName}}</view>
+                        <view class='show-desc'>{{showInfo.showDesc}}</view>
+                    </view>
+                    <view class='open-btn-box' wx:if="{{showCardBtn&&showInfo.curNum>0}}">
+                        <image src='../../asset/index/open_treasureBox.png' class='open-btn' bindtap='handleOpenBox'></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 拜师弹窗、导师不一致弹窗 -->
+    <view class='com-mask index-mask' wx:if="{{showTeacher}}">
+        <view class='container flx-ce-clm' wx:if="{{showTeacher}}">
+            <view class='knapsack-close-box' >
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closeTeacher'></image>
+            </view>
+            <view class='baishi-wrap'>
+                <view class='teacher-info'>
+                    <image src='../../asset/index/baishi_box_bg.png' class='baishi_bg'></image>
+                    <view class='header'>
+                        <image src="{{shareInfoVO.agentInfoVO.avatarUrl?shareInfoVO.agentInfoVO.avatarUrl:'../../asset/index/default_header.png'}}" class='baishi-img'></image>
+                    </view>
+                    <view class='teacher-detail'>
+                        <view class='teacher-name'>{{shareInfoVO.agentInfoVO.agentName}}</view>
+                        <view class='teacher-num'>编号:{{shareInfoVO.agentInfoVO.agentCode}}</view>
+                        <view>{{shareInfoVO.agentInfoVO.company+' '+shareInfoVO.agentInfoVO.managecom}} </view>
+                    </view>
+                </view>
+                <view class='teacher-contain flx-ce-no-clm' wx:if="{{shareInfoVO.shareStatus==2}}">
+                    <view class='teacher-title'>拜TA为师</view>
+                    <view>每天导师都会为你送出</view>
+                    <view>“学艺宝箱”</view>
+                    <button class='baishi-btn' bindtap='followTeacher'>确认拜师</button>
+                    <button class='spe-btn' bindtap='handleSelfReliance'>自立门户</button>
+                    <text class='teacher-tips'>- 民生保险 -</text>
+                </view>
+                <view class='teacher-contain flx-ce-no-clm' wx:if="{{shareInfoVO.shareStatus==3}}">
+                    <view class='disabled-receive'>无法领取宝箱</view>
+                    <view>我才是你的导师</view>
+                    <view>快来找我领取学艺宝箱吧！</view>
+                    <button class='baishi-btn' bindtap='goTreasure'>去索要</button>
+                    <text class='teacher-tips'>- 民生保险 -</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 学艺宝箱达到上限 -->
+    <view class='com-mask index-mask' wx:if="{{teacherLimit}}">
+        <view class='container flx-ce-clm' wx:if="{{teacherLimit}}">
+            <view class='knapsack-close-box' >
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closeXueyi'></image>
+            </view>
+            <view class='baishi-wrap'>
+                <view class='teacher-info'>
+                    <image src='../../asset/index/baishi_box_bg.png' class='baishi_bg'></image>
+                    <view class='header'>
+                        <image src="{{shareInfoVO.agentInfoVO.avatarUrl?shareInfoVO.agentInfoVO.avatarUrl:'../../asset/index/default_header.png'}}" class='baishi-img'></image>
+                    </view>
+                    <view class='teacher-detail'>
+                        <view class='teacher-name'>{{shareInfoVO.agentInfoVO.agentName}}</view>
+                        <view class='teacher-num'>编号:{{shareInfoVO.agentInfoVO.agentCode}}</view>
+                        <view>{{shareInfoVO.agentInfoVO.company+' '+shareInfoVO.agentInfoVO.managecom}} </view>
+                    </view>
+                </view>
+                <view class='teacher-contain flx-ce-no-clm'>
+                    <view class='teacher-title'>今日领取已达上限</view>
+                    <view>师傅领进门，修行靠个人，每天</view>
+                    <view>只能领取一个学艺宝箱哦！</view>
+                    <button class='baishi-btn' bindtap='goTreasure'>获取其他宝箱</button>
+                    <text class='teacher-tips'>- 民生保险 -</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 预加载 -->
+    <view class='com-mask index-mask' wx:if="{{showLoadingImg}}">
+        <view class="progress flx-ce-clm" wx:if="{{showLoadingImg}}">
+            <view class='cartoon-wrap flx-ce-ce'>
+                <view class='index-wrap-cartoon'>
+                    <image class='cartoon' src='../../asset/index/baobao.png'></image>
+                </view>
+            </view>
+            <image class='gift' src='../../asset/progress_bar.gif'></image>
+            <view class="index-progress-tips">玩命儿加载中...</view>
+        </view>
+    </view>
+    <!-- 领取卡片 -->
+    <view class='com-mask index-mask' wx:if="{{openBox}}" data-judge="treasure">
+        <view class='open-box-layer flx-ce-no-clm' wx:if="{{openBox}}">
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closeCards'></image>
+            </view>
+            <view class='open-box-container flx-ce-no-clm'>
+                <image src="{{openImg}}" class='open-bg'></image>
+                <view class='open-title'>{{openTitle}}</view>
+                <view class='xueyi-gift flx-ce-bet' wx:if="{{saveCardParam.chestType==1}}">
+                    <view class='flx-ce-no-clm' bindtap='handleChoseCard' data-card="helpCard">
+                        <view class='xueyi-card-name'>帮帮卡</view>
+                        <image src="{{bangbangImg}}" class='open-chose-pic'></image>
+                        <view class='xueyi-chose-icon' wx:if="{{saveCardParam.helpCard==0}}"></view>
+                        <image src='../../asset/index/chose_icon.png' class='xueyi-chose-icon chosed-icon' wx:if="{{saveCardParam.helpCard==1}}"></image>
+                    </view>
+                    <view class='flx-ce-no-clm' bindtap='handleChoseCard' data-card="removeCard">
+                        <view class='xueyi-card-name'>排除卡</view>
+                        <image src="{{paichuImg}}" class='open-chose-pic'></image>
+                        <view class='xueyi-chose-icon' wx:if="{{saveCardParam.removeCard==0}}"></view>
+                        <image src='../../asset/index/chose_icon.png' class='xueyi-chose-icon chosed-icon' wx:if="{{saveCardParam.removeCard==1}}"></image>
+                    </view>
+                    <view class='flx-ce-no-clm' bindtap='handleChoseCard' data-card="energyCard">
+                        <view class='xueyi-card-name'>能量卡</view>
+                        <image src="{{nengliangImg}}" class='open-chose-pic'></image>
+                        <view class='xueyi-chose-icon' wx:if="{{saveCardParam.energyCard==0}}"></view>
+                        <image src='../../asset/index/chose_icon.png' class='xueyi-chose-icon chosed-icon' wx:if="{{saveCardParam.energyCard==1}}"></image>
+                    </view>
+                </view>
+                <view class='xueyi-gift flx-ce-bet' wx:if="{{saveCardParam.chestType==2}}">
+                    <view class='flx-ce-no-clm'>
+                        <view class='xueyi-card-name'>{{randomName}}</view>
+                        <image src="{{randomImg}}" class='open-chose-pic'></image>
+                    </view>
+                </view>
+                <view class='xueyi-gift flx-ce-bet' wx:if="{{saveCardParam.chestType==3}}">
+                    <view class='flx-ce-no-clm'>
+                        <view class='xueyi-card-name'>帮帮卡</view>
+                        <image src="{{bangbangImg}}" class='open-chose-pic'></image>
+                    </view>
+                    <view class='flx-ce-no-clm'>
+                        <view class='xueyi-card-name'>排除卡</view>
+                        <image src="{{paichuImg}}" class='open-chose-pic'></image>
+                    </view>
+                    <view class='flx-ce-no-clm'>
+                        <view class='xueyi-card-name'>能量卡</view>
+                        <image src="{{nengliangImg}}" class='open-chose-pic'></image>
+                    </view>
+                </view>
+                <view class='xueyi-gift flx-ce-bet' wx:if="{{saveCardParam.chestType==4}}">
+                    <view class='flx-ce-no-clm'>
+                        <view class='xueyi-card-name'>能量卡</view>
+                        <image src="{{nengliangImg}}" class='open-chose-pic'></image>
+                    </view>
+                </view>
+            </view>
+            <image src='../../asset/index/put_in_bag.png' class='put-in-bag' bindtap='handleCards'></image>
+        </view>
+    </view>
+</view>

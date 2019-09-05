@@ -1,0 +1,240 @@
+<view class='challenge-page flx-ce-no-clm' style='padding-top:{{statusBarHeight+152}}rpx'>
+    <loading hidden="{{hiddenLoading}}">{{loadingText}}</loading>
+    <image class='light_bg' src="{{bgLight}}" wx:if="{{!onTest}}"></image>
+    <image src='../../asset/hongbao/red_packets_back.png' class='go-back' bindtap='goBack' style='top:{{statusBarHeight+12}}rpx'></image>
+    <!-- 答题页 -->
+    <view class='section flx-ce-clm test-page' wx:if="{{onTest}}">
+        <view class='question'>
+            <view class='question-container flx-ce-ce'>
+                <view class='ready-txt before-txt flx-ce-ce'>预备</view>
+                <view class='start-txt before-txt flx-ce-ce'>开始</view>
+                <view class='question-list flx-ce-bet-clm'>
+                    <swiper class="question-swiper" current="{{curIndex}}">
+                        <swiper-item wx:for="{{question}}" wx:key="key" wx:for-item="item" class="swiper-item" catchtouchmove="catchTouchMove">
+                            <view class='question-name flx-ce-ce'>{{item.subjectTitle}}</view>
+                            <view wx:for="{{item.queList}}" wx:key="index" wx:for-item="listItem" class="que-answer flx-ce-ce {{item.answerIndex===index?'item-chosed':''}} {{item.removeIndex===index?'remove-index':''}} {{item.helpIndex>-1&&item.helpIndex!==index?'remove-index':''}}" bindtap='choseAnswer' data-serial="{{listItem.serial}}">{{listItem.question}}</view>
+                    <view class='question-tips'>-- {{item.subjectType}} --</view>
+                        </swiper-item>
+                    </swiper>
+                    <view class='question-index-bar flx-ce-ce' bindtap='choseIndex'>
+                        <view class='index flx-ce-ce {{curIndex==0?"cur-index":""}} {{question[0].answer?"done-index":""}}' data-index='0'>1</view>
+                        <view class='index flx-ce-ce {{curIndex==1?"cur-index":""}} {{question[1].answer?"done-index":""}}' data-index='1'>2</view>
+                        <view class='index flx-ce-ce {{curIndex==2?"cur-index":""}} {{question[2].answer?"done-index":""}}' data-index='2'>3</view>
+                        <view class='index flx-ce-ce {{curIndex==3?"cur-index":""}} {{question[3].answer?"done-index":""}}' data-index='3'>4</view>
+                        <view class='index flx-ce-ce {{curIndex==4?"cur-index":""}} {{question[4].answer?"done-index":""}}' data-index='4'>5</view>
+                    </view>
+                </view>
+            </view>
+            <view class='clock-box flx-ce-ce'>
+                <view class='clock-contain flx-ce-ce'>
+                    <view class='flx-ce-ce clock-txt'>
+                        <view class='clock-num'>{{countDownTime}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="cards-tips">
+            <text class="tips-txt flx-ce-ce" wx:if="{{countDownTime==60}}"></text>
+            <text class="tips-txt flx-ce-ce" wx:if="{{countDownTime<60}}">点击"特权卡"助力答题</text>
+        </view>
+        <view class='privilegev-card flx-ce-bet' style='margin-bottom:{{isIpx?80:40}}rpx;'>
+            <view class='privilege-title flx-ce-ce'>特权卡</view>
+            <view class='privilege-contain flx-ce-ce'>
+                <image src="{{helpCard>0?bangbang:bangbangDisable}}" data-canUse="{{helpCard>0?true:false}}" data-type='bangbang' class='privilege-pic' bindtap='useCard'></image>
+                <image src="{{helpCard>1?bangbang:bangbangDisable}}" data-canUse="{{helpCard>1?true:false}}" data-type='bangbang' class='privilege-pic' bindtap='useCard'></image>
+                <image src="{{removeCard>0?paichu:paichuDisable}}" data-canUse="{{removeCard>0?true:false}}" data-type='paichu' class='privilege-pic' bindtap='useCard'></image>
+                <image src="{{removeCard>1?paichu:paichuDisable}}" data-canUse="{{removeCard>1?true:false}}" data-type='paichu' class='privilege-pic' bindtap='useCard'></image>
+                <image src="{{removeCard>2?paichu:paichuDisable}}" data-canUse="{{removeCard>2?true:false}}" data-type='paichu' class='privilege-pic' bindtap='useCard'></image>
+            </view>
+        </view>
+        <view class='test-submit'>
+            <image class='submit' src='../../asset/challengeHome/submit.png' wx:if="{{showSubmit}}" bindtap='submitTest'></image>
+            <image class='submit' src='../../asset/challengeHome/submit_disable.png' wx:if="{{!showSubmit}}"></image>
+        </view>
+    </view>
+    <!-- 查看考题 -->
+    <view class='section flx-ce-clm review-page' style='margin-top:106rpx' wx:if="{{reviewQuestion}}">
+        <view class='question'>
+            <view class='end-wrap'>
+                <image class='header-img' src='../../asset/challenge/review_question_header.png'></image>
+            </view>
+            <view class='question-container flx-ce-ce'>
+                <view class='review-question flx-ce-bet-clm'>
+                    <view class='question-info flx-ce-clm'>
+                        <view class='question-name flx-ce-ce'>{{curReview.subjectTitle}}</view>
+                        <view wx:for="{{curReview.reviewList}}" wx:key="index" class="que-answer flx-ce-ce {{(curReview.submitAnswer!=item.serial)&&(curReview.answer!=item.serial)?'unchosed':''}} {{item.serial==curReview.answer?'item-chosed':''}} {{(curReview.submitAnswer==item.serial)&&(curReview.submitAnswer!=curReview.answer)?'chose-wrong':''}}">
+                            <text>{{item.option}}</text>
+                            <image class='right-icon' src='../../asset/question_true.png' wx:if="{{curReview.answer==item.serial}}"></image>
+                            <image class='right-icon' src='../../asset/question_false_review.png' wx:if="{{curReview.submitAnswer==item.serial&&curReview.submitAnswer!=curReview.answer}}"></image>
+                        </view>
+                    </view>
+                    <view class='question-tips'>-- {{curReview.subjectType}} --</view>
+                    <view class='question-index-bar flx-ce-ce'>
+                        <view wx:for="{{5}}" wx:key="index" class='index flx-ce-ce {{(reviewData[index].answer==reviewData[index].submitAnswer)?"done-index":"wrong-index"}} {{index==reviewIndex?"cur-index":""}}' bindtap='handleReview' data-index="{{index}}">{{index+1}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class='review-btn' style='margin-top:{{isIpx?"80":"40"}}rpx'>
+            <button class='closeBtn' bindtap='closeAnswer'>关闭</button>
+        </view>
+    </view>
+    <!-- 答题结果 -->
+    <view class='answer-end-page' style='margin-top:106rpx' wx:if="{{answerEnd}}">
+        <view class='question result-page'>
+            <view class='question-container flx-ce-bet-clm en-question'>
+                <view class='end-wrap'>
+                    <image src="{{result.addStarNum!=1?'../../asset/challengeHome/en_fail_header.png':'../../asset/challengeHome/answer_end_title.png'}}" class='header-img'></image>
+                </view>
+                <view class='header-wrap-box'>
+                    <image class='header-pic-img' src="{{result.avatarUrl?result.avatarUrl:'../../asset/index/default_header.png'}}"></image>
+                </view>
+                <view class='user-name'>{{result.nickName}}</view>
+                <view class='user-level'>
+                    <image src='../../asset/challengeHome/end_box.png' class='end-box'></image>
+                    <view class='level-wrap flx-ce-ce' wx:if="{{result.userLevel===1}}">
+                        <image src='../../asset/rankList/icon_daren.png' class='level-icon'></image>
+                        <image class='star' src='../../asset/challengeHome/star_light.png'></image>
+                    </view>
+                    <view class='level-wrap flx-ce-ce' wx:if="{{result.userLevel===2}}">
+                        <image src='../../asset/rankList/icon_gaoshou.png' class='level-icon'></image>
+                        <image class='star' src='../../asset/challengeHome/star_light.png'></image>
+                        <image class='star' src='../../asset/challengeHome/star_light.png' wx:if="{{result.starNum==2}}"></image>
+                        <image class='star' src='../../asset/challengeHome/star_black.png' wx:if="{{result.starNum==1}}"></image>
+                    </view>
+                    <view class='level-wrap flx-ce-ce' wx:if="{{result.userLevel===3}}">
+                        <image src='../../asset/rankList/icon_dashi.png' class='level-icon'></image>
+                        <image class='star' src='../../asset/challengeHome/star_light.png'></image>
+                        <image class='star' src='../../asset/challengeHome/star_light.png' wx:if="{{result.starNum>1}}"></image>
+                        <image class='star' src='../../asset/challengeHome/star_light.png' wx:if="{{result.starNum==3}}"></image>
+                        <image class='star' src='../../asset/challengeHome/star_black.png' wx:if="{{result.starNum<3}}"></image>
+                        <image class='star' src='../../asset/challengeHome/star_black.png' wx:if="{{result.starNum==1}}"></image>
+                    </view>
+                    <view class='level-wrap flx-ce-ce' wx:if="{{result.userLevel===4}}">
+                        <image src='../../asset/rankList/icon_zongshi.png' class='level-icon'></image>
+                        <image class='zongshi-star' src='../../asset/challengeHome/star_zongshi.png'></image>
+                        <text class='level-text'>x{{result.starNum}}</text>
+                    </view>
+                </view>
+                <view class='logo-wrap'>
+                    <image src='../../asset/challengeHome/answer_end_logo.png' class='end-logo'></image>
+                </view>
+                <view class='answer-info' wx:if="{{result.rightNum<5}}">你答对了{{result.rightNum}}道题！</view>
+                <view class='answer-info' wx:if="{{result.rightNum==5}}">全部答对太棒了！</view>
+                <view class='look-back' bindtap='reviewResult'>回顾本关题目</view>
+                <view class='star-info'>
+                    <image class='star-btn' src='../../asset/challengeHome/star_plus.png' wx:if="{{result.addStarNum==1}}"></image>
+                    <image class='star-btn' src='../../asset/challengeHome/star_origin.png' wx:if="{{result.addStarNum==0}}"></image>
+                    <image class='star-btn' src='../../asset/challengeHome/star_minus.png' wx:if="{{result.addStarNum==-1}}"></image>
+                </view>
+                <view class='look-rank' bindtap='goRankList'>查看排行榜 ></view>
+            </view>
+            <view class='btns-group flx-ce-bet' style='margin-top:{{isIpx?"80":"40"}}rpx'>
+                <view class='challenge end-btn flx-ce-ce' bindtap='goChallengeHome'>继续挑战</view>
+                <view class='share end-btn flx-ce-ce' bindtap='handleShare'>立即分享</view>
+            </view>
+        </view>
+    </view>
+    <view class='com-mask' wx:if="{{showMask}}" bindtap='closeMask'>
+        <!-- 退出答题 -->
+        <view class='unfinshed-back-dialog' wx:if="{{unfinshed}}">
+            <view class='unfinshed-back'>
+                <view class='unfinshed-txt'>当前关卡未结束</view>
+                <view class='unfinshed-txt'>现在退出将以失败处理</view>
+                <view class='flx-ce-bet unfinshed-btn'>
+                    <view class='btn flx-ce-ce' bindtap='confirmBack'>仍要返回</view>
+                    <view class='btn go-on flx-ce-ce' bindtap='cancleBack'>继续答题</view>
+                </view>
+            </view>
+        </view>
+        <!-- 使用帮帮卡 -->
+        <view class='user-card' wx:if="{{showBangbang}}">
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closeMask'></image>
+            </view>
+            <view class='use-wrap flx-ce-clm'>
+                <image src='../../asset/challengeHome/bangbang_img.png' class='header-pic'></image>
+                <view class='power-section flx-ce-no-clm'>
+                    <text class='power-desc'>帮帮卡</text>
+                    <text class='power-desc'>帮你答这道题啦！</text>
+                    <view class='power-btn flx-ce-ce' bindtap='handleCard'>确认使用</view>
+                    <text class='power-tips'>每关最多使用2次</text>
+                </view>
+            </view>
+        </view>
+        <!-- 使用排除卡 -->
+        <view class='user-card' wx:if="{{showPaichu}}">
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closeMask'></image>
+            </view>
+            <view class='use-wrap flx-ce-clm'>
+                <image src='../../asset/challengeHome/bangbang_img.png' class='header-pic'></image>
+                <view class='power-section flx-ce-no-clm'>
+                    <text class='power-desc'>排除卡</text>
+                    <text class='power-desc'>帮你排除一道！</text>
+                    <view class='power-btn flx-ce-ce' bindtap='handleCard'>确认使用</view>
+                    <text class='power-tips'>每关最多使用3次</text>
+                </view>
+            </view>
+        </view>
+        <!-- 立即分享 -->
+        <view class='share-mask flx-ce-no-clm' wx:if="{{showShareActive}}">
+            <view class='download-wrap flx-ce-no-clm'>
+                <image src="{{challengeCoverImg}}" class='main-pic' wx:if="{{creatImg}}"></image>
+                <view class='dynamic-contain flx-ce-bet' wx:if="{{creatImg}}">
+                    <view class='share-text-contain'>
+                        <text class='share-title'>我在答题赢大奖 不服来战~</text>
+                        <text class='share-txt'>保保大师答题挑战赛~</text>
+                    </view>
+                    <view class='qr-box'>
+                        <image src="{{shareQrImg}}" class='qr-img'></image>
+                    </view>
+                </view>
+                <view class='share-canvas' wx:if="{{!creatImg}}">
+                    <canvas canvas-id="shareCanvas" style='width:550rpx;height:760rpx;display:block'></canvas>
+                </view>
+            </view>
+            <view class='btns-group flx-ce-bet'>
+                <button class='save-btn flx-ce-ce share-btn-txt' catchtap='saveImg'>保存图片</button>
+                <button data-id="shareBtn" open-type='share' class='share-btn share-btn-txt'>立即分享</button>
+            </view>
+        </view>
+        <!-- 领取红包碎片、红包 -->
+        <view class='readPackets' wx:if="{{showPackets}}">
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closeMask'></image>
+            </view>
+            <view class='flx-ce-clm' wx:if="{{result.chip&&result.isMergeChip!=1}}">
+                <view class='wrap flx-ce-ce'>
+                    <image class='light' src='../../asset/challengeHome/packet_light.png'></image>
+                    <image class='packet-img' src="{{result.chip=='A'?chipA:result.chip=='B'?chipB:result.chip=='C'?chipC:chipD}}"></image>
+                </view>
+                <view class='chip-name'>恭喜你获得红包碎片{{result.chip}}</view>
+                <view class='chip-tips'>集齐四种红包碎片即可自动合</view>
+                <view class='chip-tips tip-btn'>成赛季红包</view>
+                <button class='chip-btn' catchtap='closeMask'>收下</button>
+            </view>
+            <view class='big-packets' wx:if="{{result.isMergeChip==1}}">
+                <view class='packets-wrap'>
+                    <image src="{{redPackets}}" class='packets-img'></image>
+                </view>
+                <button class='chip-btn' catchtap='closeMask'>收下</button>
+            </view>
+        </view>
+        <!-- 等级晋升 -->
+        <view class='upgrade' wx:if="{{upgrade}}">
+            <view class='knapsack-close-box'>
+                <image src='../../asset/mask_close.png' class='knapsack-close' bindtap='closeMask'></image>
+            </view>
+            <view class='flx-ce-clm'>
+                <view class='up-wrap flx-ce-ce'>
+                    <image src='../../asset/challengeHome/packet_light.png' class='light'></image>
+                    <image src="{{result.userLevel==2?gaoshouUp:result.userLevel==3?dashiUp:zongshiUp}}" class='up-icon'></image>
+                </view>
+                <view class='chip-name'>恭喜你晋升Lv.{{result.userLevel}}{{result.userLevel==1?'达人':result.userLevel==2?'高手':result.userLevel==3?'大师':'宗师'}}</view>
+                <view class='chip-tips' wx:if="{{result.userLevel<4}}">请继续努力，再接再厉哟~</view>
+                <view class='chip-tips' wx:if="{{result.userLevel==4}}">开启排位赛，瓜分红包和积分啦~</view>
+            </view>
+        </view>
+    </view>
+</view>
